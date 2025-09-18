@@ -1,25 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Webposts-Home{% endblock %}
 
 {% block body %}
 <section class="container">
-    <h2 class="display-4">Les dernières tendences du Web</h2>
-    {% for i in 1..10 %}
+    <h2 class="display-4 my-5">Les dernières tendances du Web</h2>
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img src="{{ asset('images/posts/1.jpg') }}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    <h5 class="card-title">L'essor des Frameworks JavaScript modernes</h5>
+                    <p class="card-text">Les technologies web évoluent à une vitesse incroyable. Aujourd'hui, les développeurs ont accès à des outils puissants pour créer des sites et des applications plus dynamiques et interactifs que jamais. Les frameworks JavaScript modernes comme React, Vue.js et Angular sont devenus des piliers de cette transformation. Ils permettent de simplifier la création d'applications web complexes tout en garantissant des performances accrues. Que ce soit pour des applications mono-page ou des plateformes complètes, ces frameworks sont au cœur du web moderne.</p>
+                    <p class="card-text"><a href="" class="btn btn-secondary">Tous les articles</a></p>
                 </div>
             </div>
         </div>
     </div>
-    {% endfor %}
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ asset('images/posts/2.jpg') }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">La sécurité avec PHP 8</h5>
+                    <p class="card-text">Les technologies web évoluent à une vitesse incroyable. Aujourd'hui, les développeurs ont accès à des outils puissants pour créer des sites et des applications plus dynamiques et interactifs que jamais. Les frameworks JavaScript modernes comme React, Vue.js et Angular sont devenus des piliers de cette transformation. Ils permettent de simplifier la création d'applications web complexes tout en garantissant des performances accrues. Que ce soit pour des applications mono-page ou des plateformes complètes, ces frameworks sont au cœur du web moderne.</p>
+                    <p class="card-text"><a href="" class="btn btn-secondary">Tous les articles</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}
