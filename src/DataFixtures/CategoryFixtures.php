@@ -5,9 +5,14 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoryFixtures extends Fixture
 {
+    public function __construct(private readonly SluggerInterface $slugger)
+    {
+
+    }
     private array $categories = [
         'PHP 8',
         'IA',
@@ -22,7 +27,8 @@ class CategoryFixtures extends Fixture
     {
         foreach ($this->categories as $category) {
             $cat = new Category();
-            $cat->setName($category);
+            $cat->setName($category)
+                ->setSlug($this->slugger->slug($category));
             $manager->persist($cat);
         }
 

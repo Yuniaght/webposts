@@ -1,4 +1,8 @@
 /* customs css */
+h3 {
+    font-size: 1.4rem;
+}
+
 /* Header */
 
 .banner {
@@ -6,3 +10,4 @@
     background: url("../images/banner.jpg") no-repeat center center;
     background-size: cover;
 }
+

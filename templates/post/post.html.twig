@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section id="post" class="pt-5 row">
+            <div class="col-md-6 p-0">
+                <img src="{{ asset('images/posts/' ~ post.image) }}" alt="{{ post.title }}" class="img-fluid">
+            </div>
+            <div class="col-md-6 p-5 pt-0">
+                <h2 class="display-5">{{ post.title }}</h2>
+                <p class="lead">{{ post.category.name }} - <small class="text-body-secondary">Créé le {{ post.createdAt|date('d/m/Y') }} - Édité le {{ post.editedAt|date('d/m/Y') }}</small></p>
+                <p> {{ post.content|nl2br }}</p>
+                <p>
+                    <a href="{{ path('app_posts') }}" class="btn btn-outline-dark">Retour aux articles</a>
+                </p>
+            </div>
+        </section>
+    </main>
+{% endblock %}

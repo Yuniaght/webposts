@@ -7,9 +7,14 @@ use App\Entity\Post;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PostFixtures extends Fixture
 {
+    public function __construct(private readonly SluggerInterface $slugger)
+    {
+
+    }
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
@@ -22,8 +27,10 @@ class PostFixtures extends Fixture
                  ->setEditedAt((\DateTimeImmutable::createFromMutable($faker->dateTimeBetween("-20 days", "now"))))
                  ->setImage($i .".jpg")
                  ->setIsPublished($faker->boolean(90))
-                 ->setCategory($categories[array_rand($categories)]);
+                 ->setCategory($categories[array_rand($categories)])
+                 ->setSlug($this->slugger->slug($post->getTitle()));
             $manager->persist($post);
+
         }
 
 
