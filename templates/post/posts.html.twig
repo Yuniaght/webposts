@@ -14,7 +14,7 @@
                             <h3 class="card-header">{{ post.title }}</h3>
                             <img src="{{ asset('images/posts/' ~post.image) }}" class="card-img-top" alt="{{ post.title }}">
                             <div class="card-body">
-                                <h5 class="card_title">{{ post.category.name }}</h5>
+                                <h5 class="card_title">{{ post.category }}</h5>
                                 <p class="card-text">{{ post.content|u.truncate(100, "...", false)}}...</p>
                             </div>
                             <ul class="list-group list-group-flush">

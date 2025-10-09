@@ -18,13 +18,10 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Our posts</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ path('app_posts') }}">Tout</a>
-                            <a class="dropdown-item" href="#">Laravel</a>
-                            <a class="dropdown-item" href="#">Symfony</a>
-                            <a class="dropdown-item" href="#">PHP8</a>
-                            <a class="dropdown-item" href="#">Security</a>
-                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('app_posts') }}">Tout</a></li>
+                            {{ render(controller('App\\Controller\\NavController::header')) }}
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>

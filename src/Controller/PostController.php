@@ -34,16 +34,18 @@ final class PostController extends AbstractController
     }
 
     #[Route('/posts/{category}', name: 'app_posts_by_category')]
-    public function postsByCategory(PostRepository $repository, CategoryRepository $categoryRepository, string $category): Response
+    public function postsByCategory(PostRepository $repository, string $category): Response
     {
-        $categorySlug = $categoryRepository->findOneBy(['slug'=>$category]);
+        /* $categorySlug = $categoryRepository->findOneBy(['slug'=>$category]);
         $posts = $repository->findBy(
             [
                 'isPublished' => true,
                 'category' => $categorySlug->getId()
             ],
-            ['createdAt' => 'DESC']);
+            ['createdAt' => 'DESC']);*/
+        $posts = $repository->findByCategory($category);
         return $this->render('post/posts.html.twig', [
             'posts' => $posts]);
     }
+
 }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -40,4 +41,23 @@ class PostRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    public function findByCategory($category):array
+    {
+        return $this->createQueryBuilder('p')
+                    ->select(
+                            "p.title",
+                                "p.content",
+                                "p.createdAt",
+                                "p.image",
+                                "p.slug",
+                                "c.name as category"
+                            )
+                    ->leftJoin('p.category', 'c')
+                    ->where('c.slug = :val')
+                    ->andWhere('p.isPublished = 1')
+                    ->setParameter('val', $category)
+                    ->orderBy('p.createdAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }
