@@ -1,0 +1,14 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Admin - Posts{% endblock %}
+
+{% block body %}
+<main class="container">
+    <section class="row">
+        <div class="col-md-9 offset-1">
+            <h1 class="display-4 pb-4">Test</h1>
+            <a href="{{ path('app_admin_newPost') }}" class="btn btn-outline-primary">Nouvel article</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

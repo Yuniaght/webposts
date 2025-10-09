@@ -18,7 +18,7 @@ final class PostController extends AbstractController
         $posts = $repository->findBy(
             ["isPublished" => true],
             ['createdAt' => 'DESC']);
-        // dd($posts);
+        //dd($posts);
         return $this->render('post/posts.html.twig', [
             'posts' => $posts
         ]);

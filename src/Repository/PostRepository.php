@@ -44,14 +44,14 @@ class PostRepository extends ServiceEntityRepository
     public function findByCategory($category):array
     {
         return $this->createQueryBuilder('p')
-                    ->select(
-                            "p.title",
-                                "p.content",
-                                "p.createdAt",
-                                "p.image",
-                                "p.slug",
-                                "c.name as category"
-                            )
+                    //->select(
+                    //        "p.title",
+                    //            "p.content",
+                    //            "p.createdAt",
+                    //            "p.image",
+                    //            "p.slug",
+                    //            "c.name"
+                    //        )
                     ->leftJoin('p.category', 'c')
                     ->where('c.slug = :val')
                     ->andWhere('p.isPublished = 1')
