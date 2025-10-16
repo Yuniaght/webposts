@@ -11,3 +11,34 @@ h3 {
     background-size: cover;
 }
 
+.adminThumbnail {
+    width: 40px;
+}
+
+.flashsuccess {
+    background-color: lightgreen;
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    transform: translate(-50%);
+    width: fit-content;
+    padding: 0.75rem;
+    opacity: 50%;
+}
+
+.autohide {
+    animation: fadeOut 0.5s ease-in-out 2.5s forwards;
+}
+
+
+@keyframes fadeOut {
+
+    from {
+        opacity: 50%;
+    }
+
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}

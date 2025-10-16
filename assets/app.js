@@ -1,3 +1,5 @@
+// Icofont
+import './styles/icofont/icofont.min.css'
 // Bootstrap CSS
 import './styles/bootstrap.min.css'
 // Bootstrap JS

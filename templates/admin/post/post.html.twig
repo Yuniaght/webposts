@@ -6,8 +6,56 @@
 <main class="container">
     <section class="row">
         <div class="col-md-9 offset-1">
-            <h1 class="display-4 pb-4">Test</h1>
+            <h1 class="display-4 pb-4">Liste des articles</h1>
             <a href="{{ path('app_admin_newPost') }}" class="btn btn-outline-primary">Nouvel article</a>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="adminThumbnail">Image</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Publication</th>
+                        <th scope="col">Édité le</th>
+                        <th scope="col" colspan="3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td class="adminThumbnail"><img src="{{ asset('images/posts/' ~post.image) }}" class="img-fluid" alt="{{ post.title }}"></td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.category.name }}</td>
+                        <td>{{ post.createdAt|date('d/m/y') }}</td>
+                        <td>{{ post.editedAt|date('d/m/y') }}</td>
+                        <td>
+                            <a href="{{ path('app_admin_deletePost', {id:post.id}) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="icofont-ui-delete"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('app_admin_editPost', {id:post.id}) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="icofont-ui-edit"></i>
+                            </a>
+                        </td>
+                        <td>
+                            {% if post.isPublished %}
+                                <a href="{{ path('app_admin_ispublished', {id:post.id}) }}" class="btn btn-sm btn-outline-success">
+                                    <i class="icofont-eye"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('app_admin_ispublished', {id:post.id}) }}" class="btn btn-sm btn-outline-danger">
+                                    <i class="icofont-eye-blocked"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </section>
 </main>

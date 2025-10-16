@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,10 +23,10 @@ final class PostController extends AbstractController
             'posts' => $posts
         ]);
     }
-    #[Route('/post/{slug}', name: 'app_post')]
-    public function post(postRepository $repository, string $slug): Response
+    #[Route('/post/{slug:post}', name: 'app_post')]
+    public function post(Post $post): Response
     {
-        $post = $repository->findOneBy(['slug'=>$slug]);
+        // $post = $repository->findOneBy(['slug'=>$slug]);
         // dd($post);
         return $this->render('post/post.html.twig', [
             'post' => $post
