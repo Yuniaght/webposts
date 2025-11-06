@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-6 p-5 pt-0">
                 <h2 class="display-5">{{ post.title }}</h2>
-                <p class="lead">{{ post.category.name }} - <small class="text-body-secondary">Créé le {{ post.createdAt|date('d/m/Y') }} - Édité le {{ post.editedAt|date('d/m/Y') }}</small></p>
+                <p class="lead">{{ post.category.name }} - <small class="text-body-secondary">Créé le {{ post.createdAt|date('d/m/Y') }} - Édité le {{ post.editedAt|date('d/m/Y') }} par {{ post.user.firstName }} {{ post.user.lastName }}</small></p>
                 <p> {{ post.content|nl2br }}</p>
                 <p>
                     <a href="{{ path('app_posts') }}" class="btn btn-outline-dark">Retour aux articles</a>

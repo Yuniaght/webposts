@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
+                        <h5 class="card-title">{{ post.title }} - <small>{{ post.user.firstName }} {{ post.user.lastName }}</small></h5>
                         <p class="card-text">{{post.content|u.truncate(300, "...", false)}}</p>
                         <p class="card-text"><a href="{{ path('app_post', {'slug': post.slug}) }}" class="btn btn-secondary">Lire l'article</a></p>
                     </div>

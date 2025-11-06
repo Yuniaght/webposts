@@ -20,5 +20,17 @@
                 </li>
             </ul>
         </div>
+        <div class="d-flex">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ asset('images/users/' ~ app.user.imageName) }}" alt="{{ app.user.imageName }}" class="img-menu">   {{ app.user.firstName }} {{ app.user.lastName }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="" class="dropdown-item">Mon profil</a></li>
+                    <li><a href="" class="dropdown-item">Modifier le profil</a></li>
+                    <li><a href="{{ path('app_logout') }}" class="dropdown-item">Se déconnecter</a></li>
+                    <li><a href="{{ path('app_home') }}" class="dropdown-item">Retour sur site</a></li>
+                </ul>
+            </div>
     </div>
 </nav>

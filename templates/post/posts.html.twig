@@ -3,10 +3,22 @@
 {% block title %}WebPosts - Articles{% endblock %}
 
 {% block body %}
+    {% set categoryChosen = app.request.attributes.get('category') %}
+    {% set firstPost = posts|first %}
     <main class="container">
         <section id="posts">
             <div class="row">
-                <h2 class="display-4 my-5">Tous nos articles</h2>
+                <h2 class="display-4 my-5">
+                    {% if categoryChosen is not null %}
+                        {% if firstPost %}
+                            Article de la catégorie : {{ firstPost.category.name }}
+                        {% else %}
+                            {{ categoryChosen }}
+                        {% endif %}
+                    {% else %}
+                        Tous nos articles
+                    {% endif %}
+                </h2>
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% for post in posts %}
                     <div class="col">
@@ -18,7 +30,7 @@
                                 <p class="card-text">{{ post.content|u.truncate(100, "...", false)}}...</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Créé le {{ post.createdAt|date('d/m/y') }}</li>
+                                <li class="list-group-item">Créé le {{ post.createdAt|date('d/m/y') }} par {{ post.user.firstName }} {{ post.user.lastName }}</li>
                                 <li class="list-group-item"><a href="{{ path('app_post', {'slug': post.slug}) }}" class="btn btn-outline-dark">Lire la suite</a></li>
                             </ul>
                         </div>

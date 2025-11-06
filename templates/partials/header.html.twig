@@ -28,10 +28,27 @@
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button type="button" class="btn btn-sm btn-secondary">S'identifier</button>
-                    &nbsp;
-                    &nbsp;
-                    <button type="button" class="btn btn-sm btn-outline-secondary">S'inscrire</button>
+                    {% if not app.user %}
+                        <a type="button" class="btn btn-sm btn-secondary" href="{{  path('app_login') }}">S'identifier</a>
+                        &nbsp;
+                        &nbsp;
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ path('app_register') }}">S'inscrire</a>
+                    {% else %}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('images/users/' ~ app.user.imageName) }}" alt="{{ app.user.imageName }}" class="img-menu">   {{ app.user.firstName }} {{ app.user.lastName }}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="" class="dropdown-item">Mon profil</a></li>
+                                <li><a href="" class="dropdown-item">Modifier le profil</a></li>
+                                <li><a href="{{ path('app_logout') }}" class="dropdown-item">Se déconnecter</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a href="{{ path('app_admin_posts') }}" class="dropdown-item">Administration</a></li>
+                            {% endif %}
+                        </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

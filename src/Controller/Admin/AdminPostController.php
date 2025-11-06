@@ -42,6 +42,7 @@ final class AdminPostController extends AbstractController
             $post->setCreatedAt(new \DateTimeImmutable());
             $post->setEditedAt(new \DateTimeImmutable());
             $post->setSlug($slugger->slug($post->getTitle()));
+            $post->setUser($this->getUser());
             $manager->persist($post);
             $manager->flush();
             $this->addFlash(
