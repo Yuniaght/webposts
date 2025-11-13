@@ -6,11 +6,14 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class AdminPostController extends AbstractController
 {
@@ -19,18 +22,20 @@ final class AdminPostController extends AbstractController
 
     //}
     #[Route('/admin/posts', name: 'app_admin_posts')]
-    public function AdminPosts(PostRepository $postsRepository): Response
+    public function AdminPosts(PostRepository $postsRepository,Request $request, PaginatorInterface $paginator): Response
     {
         $posts = $postsRepository->findBy(
             [],
             ['createdAt' => 'DESC']
         );
+        $pagination = $paginator->paginate($posts, $request->query->getInt('page', 1), 10);
         return $this->render('admin/post/post.html.twig', [
-            'posts' => $posts,
+            'posts' => $pagination,
         ]);
     }
 
     #[Route('/admin/newPost', name: 'app_admin_newPost')]
+    #[IsGranted(new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")'))]
     public function newPost(EntityManagerInterface $manager, Request $request): Response
     {
 
@@ -57,6 +62,7 @@ final class AdminPostController extends AbstractController
     }
 
     #[Route('/admin/deletePost/{id}', name: 'app_admin_deletePost')]
+    #[IsGranted(new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")'))]
     public function deletePost(Post $post, EntityManagerInterface $manager): Response
     {
         $manager->remove($post);
@@ -69,6 +75,7 @@ final class AdminPostController extends AbstractController
     }
 
     #[Route('/admin/editPost/{id}', name: 'app_admin_editPost')]
+    #[IsGranted(new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")'))]
     public function editPost(Post $post, EntityManagerInterface $manager, Request $request): Response
     {
         $form = $this->createForm(PostType::class, $post);
@@ -91,6 +98,7 @@ final class AdminPostController extends AbstractController
     }
 
     #[Route('/admin/isPublished/{id}', name: 'app_admin_ispublished')]
+    #[IsGranted(new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")'))]
     public function publishPost(Post $post, EntityManagerInterface $manager): Response
     {
         $this->addFlash(
