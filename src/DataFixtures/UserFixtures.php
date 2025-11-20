@@ -12,15 +12,15 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UserFixtures extends Fixture
 {
-    private object $hasher;
-    /**
-     * UserFixtures constructor
-     * @param UserPasswordHasherInterface $hasher
-     */
-    public function __construct(UserPasswordHasherInterface $hasher, private readonly SluggerInterface $slugger)
-    {
-        $this->hasher = $hasher;
-    }
+        private object $hasher;
+        /**
+         * UserFixtures constructor
+         * @param UserPasswordHasherInterface $hasher
+         */
+        public function __construct(UserPasswordHasherInterface $hasher, private readonly SluggerInterface $slugger)
+        {
+            $this->hasher = $hasher;
+        }
     private array $gender = ["male", "female"];
 
     public function load(ObjectManager $manager): void

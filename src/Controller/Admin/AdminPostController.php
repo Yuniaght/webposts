@@ -22,15 +22,14 @@ final class AdminPostController extends AbstractController
 
     //}
     #[Route('/admin/posts', name: 'app_admin_posts')]
-    public function AdminPosts(PostRepository $postsRepository,Request $request, PaginatorInterface $paginator): Response
+    public function AdminPosts(PostRepository $postsRepository): Response
     {
         $posts = $postsRepository->findBy(
             [],
             ['createdAt' => 'DESC']
         );
-        $pagination = $paginator->paginate($posts, $request->query->getInt('page', 1), 10);
         return $this->render('admin/post/post.html.twig', [
-            'posts' => $pagination,
+            'posts' => $posts,
         ]);
     }
 

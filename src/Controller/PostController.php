@@ -37,7 +37,7 @@ final class PostController extends AbstractController
     }
 
     #[Route('/posts/{category}', name: 'app_posts_by_category')]
-    public function postsByCategory(PostRepository $repository, string $category): Response
+    public function postsByCategory(PostRepository $repository,Request $request,PaginatorInterface $paginator, string $category): Response
     {
         /* $categorySlug = $categoryRepository->findOneBy(['slug'=>$category]);
         $posts = $repository->findBy(
@@ -47,8 +47,9 @@ final class PostController extends AbstractController
             ],
             ['createdAt' => 'DESC']);*/
         $posts = $repository->findByCategory($category);
+        $pagination = $paginator->paginate($posts, $request->query->getInt('page', 1), 10);
         return $this->render('post/posts.html.twig', [
-            'posts' => $posts]);
+            'posts' => $pagination]);
     }
 
 }

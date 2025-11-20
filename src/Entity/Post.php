@@ -5,11 +5,16 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[Vich\Uploadable]
+#[UniqueEntity(
+    fields: ['title'],
+    message: 'Ce titre éxiste déjà !')]
 class Post
 {
     #[ORM\Id]
@@ -17,9 +22,19 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: "Le titre doit contenir au minimum {{ limit }} caractères",
+        maxMessage: "Le titre doit contenir au minimum {{ limit }} caractères")]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 10,
+        minMessage: "Le titre doit contenir au minimum {{ limit }} caractères")]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
