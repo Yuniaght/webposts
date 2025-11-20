@@ -26,12 +26,19 @@ final class ContactController extends AbstractController
                 ->subject($contact->getSubject())
                 ->text($contact->getMessage());
             $mailer->send($email);
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute(('app_contact_thanks'));
+
         }
         return $this->render('contact/contact.html.twig',
                                     [
                                         'form' => $form,
                                     ]
                             );
+    }
+
+    #[Route('/contact/thanks', name: 'app_contact_thanks')]
+    public function thanks(): Response
+    {
+        return $this->render('contact/thanks.html.twig');
     }
 }
