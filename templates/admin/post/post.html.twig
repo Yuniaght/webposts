@@ -11,18 +11,18 @@
         </div>
     </section>
     <section>
-        <div class="row">
-            <table class="table table-hover display pt-3" id="list">
+        <div class="row" data-controller="datatable" data-order-index="1" id="postTable">
+            <table class="table table-hover display pt-3" >
                 <thead>
                     <tr>
-                        <th scope="col" class="adminThumbnail">Image</th>
+                        <th scope="col" class="adminThumbnail" data-dt-order="disable">Image</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Catégorie</th>
                         <th scope="col">Publication</th>
                         <th scope="col">Édité le</th>
-                        <th scope="col"><i class="icofont-ui-delete"></i></th>
-                        <th scope="col"><i class="icofont-ui-edit"></i></th>
-                        <th scope="col"><i class="icofont-eye"></i></th>
+                        <th scope="col" data-dt-order="disable"><i class="icofont-ui-delete"></i></th>
+                        <th scope="col" data-dt-order="disable"><i class="icofont-ui-edit"></i></th>
+                        <th scope="col" data-dt-order="disable"><i class="icofont-eye"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,23 +58,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <script>
-                $(function() {
-                    $('#list').DataTable(
-                        {
-                            lengthChange: false,
-                            columnsDefs: [
-                                {
-                                    orderable: false,
-                                    targets: [1,6,7,8]
-                                }
-                            ],
-                            info:false,
-                            order:[1, 'asc']
-                        }
-                    )
-                })
-            </script>
         </div>
     </section>
 </main>
